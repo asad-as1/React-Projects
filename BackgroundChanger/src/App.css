@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 60%;
+}
+.common {
+    outline: none;
+    padding: 4px;
+    border-radius: 5px; 
+    color: white;
+    cursor: pointer;
+}
+
+.m2 {
+    display: flex;
+    gap: 5px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 5px;
+}

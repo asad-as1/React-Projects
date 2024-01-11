@@ -1,0 +1,38 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: lightcoral;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 19px;
+  margin-top: 100px;
+}
+
+.sub, .add {
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 40px;
+  background-color: white;
+  cursor: pointer;
+}
+.sub {
+  width: 40px;
+}
+.count {
+  background-color: white;
+  padding: 14px;
+  border-radius: 50%;
+}
