@@ -4,11 +4,11 @@ import './App.css'
 import authService from "./appwrite/auth"
 import {login, logout} from "./store/authSlice"
 import { Header, Footer } from './components';
-
+import { useSelector } from 'react-redux';
 function App() {
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch(); 
+  const userData = useSelector((state)=>state.auth.userData)
   useEffect(() => {
     authService.getCurrentUser()
     .then((userData) => {
