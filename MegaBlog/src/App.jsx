@@ -7,9 +7,11 @@ import { Header, Footer } from './components';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 function App() {
+
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch(); 
   const userData = useSelector((state)=>state.auth.userData)
+  
   useEffect(() => {
     authService.getCurrentUser()
     .then((userData) => {
