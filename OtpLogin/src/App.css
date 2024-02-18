@@ -1,0 +1,47 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgba(3, 3, 62, 0.943);
+    color: white;
+}
+.app {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px 15px;
+    font-size: 18px;
+    background-color: rgb(15, 231, 15);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.num {
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 200px;
+    border: none;
+    outline: none;
+}
+
+.otpInp {
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    font-size: 1.2rem;
+}
