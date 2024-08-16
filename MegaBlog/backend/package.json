@@ -6,11 +6,12 @@
     "mongoose": "^8.5.3"
   },
   "scripts": {
-   "start": "nodemon src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "devDependencies": {},
   "keywords": [],
   "author": "",
