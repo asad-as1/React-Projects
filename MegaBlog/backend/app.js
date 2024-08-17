@@ -22,21 +22,16 @@ const connect = async () => {
 };
 connect();
 
-// Route for testing
+// Routes
+const userRouter = require('./src/router/user.routes')
+app.use("/user", userRouter);
+
 app.get("/", (req, res) => {
   res.send("hi");
 });
 
 app.listen(5000, () => {
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port 5000');
 })
-
-
-
-// routes
-// const userRouter = require("./router/user.routes")
-// const postRouter = require("./router/post.routes")
-// app.use("/api/user", userRouter)
-// app.use("/api/post", postRouter)
 
 module.exports = app;
