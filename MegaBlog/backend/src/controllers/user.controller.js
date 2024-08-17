@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post')
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv')
 dotenv.config(); 
@@ -7,14 +8,14 @@ dotenv.config();
 // Register a new user
 exports.register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const newUser = new User({ username, email, password });
+    const newUser = new User({ username, name, email, password });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully', user: newUser });
@@ -66,12 +67,12 @@ exports.getProfile = async (req, res) => {
 // Update user profile
 exports.updateProfile = async (req, res) => {
   try {
-    const { username, bio, profilePicture } = req.body;
+    const { username, name, bio, profilePicture } = req.body;
 
     // Find the user by ID and update the fields
     const updatedUser = await User.findByIdAndUpdate(
       req.userId,
-      { username, bio, profilePicture },
+      { username, name, bio, profilePicture },
       { new: true, runValidators: true }
     ).select('-password'); // Exclude the password field
 
@@ -81,18 +82,25 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-// Middleware for JWT authentication
-exports.authMiddleware = (req, res, next) => {
-  const token = req.header('Authorization').replace('Bearer ', '');
-  if (!token) {
-    return res.status(401).json({ message: 'No token, authorization denied' });
-  }
 
+// Delete a user account and associated data
+exports.deleteUser = async (req, res) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
-    next();
+    const { userId } = req.query;
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    await Post.deleteMany({ author: userId });
+
+    // Inside the deleteUser function
+    await Post.updateMany({ likes: userId }, { $pull: { likes: userId } });
+    await Post.updateMany({ 'comments.user': userId }, { $pull: { comments: { user: userId } } });
+    
+
+    res.status(200).json({ message: 'User account and associated data deleted successfully' });
   } catch (error) {
-    res.status(401).json({ message: 'Invalid token' });
+    res.status(500).json({ message: 'Server error', error });
   }
 };

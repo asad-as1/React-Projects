@@ -24,7 +24,9 @@ connect();
 
 // Routes
 const userRouter = require('./src/router/user.routes')
+const postRouter = require('./src/router/post.routes')
 app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 app.get("/", (req, res) => {
   res.send("hi");
